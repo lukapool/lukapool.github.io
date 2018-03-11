@@ -68,6 +68,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.12)
   jekyll-theme-type!
+  jekyll-watch
   rake (~> 10.0)
 
 BUNDLED WITH

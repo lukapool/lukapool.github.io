@@ -8,7 +8,15 @@ figure {
 }
 pre {
   overflow: auto;
-  word-wrap: normal;
+  background-color: red;
+  margin-bottom: 1.3em;
+  padding: 1em 2.5%;
+  background: #e8f2fb;
+  border: 1px solid #c9e1f6;
+  border-radius: 3px;
+  font-size: .9em;
+  font-weight: normal;
+  line-height: 1.3em;
 }
 // For correct line number width in Github Gists
 .gist table tbody tr td {
@@ -29,7 +37,6 @@ body {
   color: $text-color;
   font-family: $font-family-main;
   font-size: $font-size;
-  word-wrap: break-word;
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-family-headings;

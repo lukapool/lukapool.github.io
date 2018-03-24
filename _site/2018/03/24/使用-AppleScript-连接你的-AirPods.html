@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>使用 AppleScript 连接你的 AirPods | Luka's Blog</title>
+	<meta name="description" content="引言个人觉得 AirPods 是一款十分出色的无线蓝牙耳机，但是我在使用该耳机的过程中仍然遇到某些问题。耳机在 iPhone 和 MacBook 相互切换的过程中经常遇到切换不成功或者切换时间长的情况，例如我想把 AirPods 的连接切换到 Macbook 上，需要点击电脑菜单栏上的蓝牙图标（需在蓝牙设置中设置...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/assets/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="/2018/03/24/%E4%BD%BF%E7%94%A8-AppleScript-%E8%BF%9E%E6%8E%A5%E4%BD%A0%E7%9A%84-AirPods.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="Luka's Blog" href="/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.loli.net/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/fe1f3ee8002d4466e4be689a4c74334e?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">Luka's Blog</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/iOS.html">
+					iOS
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/tags.html">
+					Tags
+				</a>
+			</li>
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled  -->
+			
+
+
+<li>
+	<a href="mailto:422366176@qq.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/lukapool" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            <!-- Search bar -->
+            
+		</ul>
+	</nav>
+    
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">使用 AppleScript 连接你的 AirPods</h1>
+    
+    <p class="meta">
+      March 24, 2018
+      
+    </p>
+  </header>
+  <section class="post-content"><h3 id="引言">引言</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>个人觉得 AirPods 是一款十分出色的无线蓝牙耳机，但是我在使用该耳机的过程中仍然遇到某些问题。耳机在 iPhone 和 MacBook 相互切换的过程中经常遇到切换不成功或者切换时间长的情况，例如我想把 AirPods 的连接切换到 Macbook 上，需要点击电脑菜单栏上的蓝牙图标（需在蓝牙设置中设置才会显示）里面的 AirPods 子菜单中的 Connect 选项，AirPods 还不能保证点击一次就能成功连上。如果不成功，还要再操作一次。我曾经试过按四次 Connect 才成功切换 (T_T)。于是我在网上搜索了一下解决的方法，最后决定使用 AppleScript 帮助我完成连接耳机的繁琐操作。AppleScript 是一个好东西，功能十分强大。这里使用了 AppleScript 模拟用户点击菜单栏的功能。
+</code></pre></div></div>
+
+<h3 id="代码">代码</h3>
+
+<figure class="highlight"><pre><code class="language-applescript" data-lang="applescript"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+</pre></td><td class="code"><pre><span class="c1">-- 功能说明: 快速在 Macbook 上切换到 AirPods</span><span class="w">
+</span><span class="c1">-- 修改: Luka 2018/2/19</span><span class="w">
+</span><span class="c1">-- 修改: Luka 2018/2/22; 防止 AirPods 没开机时无限尝试连接；</span><span class="w">
+</span><span class="k">tell</span><span class="w"> </span><span class="nb">application</span><span class="w"> </span><span class="s2">"System Events"</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">tell</span><span class="w"> </span><span class="nv">process</span><span class="w"> </span><span class="s2">"SystemUIServer"</span><span class="w">
+	</span><span class="k">set</span><span class="w"> </span><span class="nv">maxTryCount</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">5</span><span class="w">
+	</span><span class="k">set</span><span class="w"> </span><span class="nv">flag</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">0</span><span class="w">
+	</span><span class="k">set</span><span class="w"> </span><span class="nv">tryCount</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">0</span><span class="w">
+	</span><span class="k">set</span><span class="w"> </span><span class="nv">bt</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="na">menu</span><span class="w"> </span><span class="nv">bar</span><span class="w"> </span><span class="nb">item</span><span class="w"> </span><span class="nb">whose</span><span class="w"> </span><span class="nv">description</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="s2">"bluetooth"</span><span class="p">)</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="na">menu</span><span class="w"> </span><span class="nv">bar</span><span class="w"> </span><span class="mi">1</span><span class="w">
+	</span><span class="k">repeat</span><span class="w"> </span><span class="k">until</span><span class="w"> </span><span class="nv">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+		</span><span class="nv">click</span><span class="w"> </span><span class="nv">bt</span><span class="w">
+		</span><span class="k">tell</span><span class="w"> </span><span class="p">(</span><span class="nb">first</span><span class="w"> </span><span class="na">menu</span><span class="w"> </span><span class="nb">item</span><span class="w"> </span><span class="nb">whose</span><span class="w"> </span><span class="na">title</span><span class="w"> </span><span class="ow">contains</span><span class="w"> </span><span class="s2">"AirPods"</span><span class="p">)</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="na">menu</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nv">bt</span><span class="w">
+			</span><span class="nv">click</span><span class="w">
+			</span><span class="k">tell</span><span class="w"> </span><span class="na">menu</span><span class="w"> </span><span class="mi">1</span><span class="w">
+				</span><span class="k">if</span><span class="w"> </span><span class="nb">exists</span><span class="w"> </span><span class="na">menu</span><span class="w"> </span><span class="nb">item</span><span class="w"> </span><span class="s2">"Connect"</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="c1">-- 耳机没连接</span><span class="w">
+					</span><span class="nv">click</span><span class="w"> </span><span class="na">menu</span><span class="w"> </span><span class="nb">item</span><span class="w"> </span><span class="s2">"Connect"</span><span class="w">
+					</span><span class="k">set</span><span class="w"> </span><span class="nv">tryCount</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nv">tryCount</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w">
+					</span><span class="k">if</span><span class="w"> </span><span class="nv">tryCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">maxTryCount</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">then</span><span class="w">
+						</span><span class="k">exit</span><span class="w"> </span><span class="k">repeat</span><span class="w">
+					</span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="w">
+					</span><span class="nb">log</span><span class="w"> </span><span class="s2">"开始第"</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nv">tryCount</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="s2">"次连接..."</span><span class="w">
+					</span><span class="nb">delay</span><span class="w"> </span><span class="mi">6</span><span class="w">
+				</span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nb">exists</span><span class="w"> </span><span class="na">menu</span><span class="w"> </span><span class="nb">item</span><span class="w"> </span><span class="s2">"Disconnect"</span><span class="w"> </span><span class="k">then</span><span class="w">
+					</span><span class="na">key code</span><span class="w"> </span><span class="mi">53</span><span class="w"> </span><span class="c1">-- 为了关闭下拉菜单栏</span><span class="w">
+					</span><span class="k">set</span><span class="w"> </span><span class="nv">flag</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">1</span><span class="w">
+					</span><span class="nb">log</span><span class="w"> </span><span class="s2">"可能已经连上 AirPods 了..."</span><span class="w">
+				</span><span class="k">else</span><span class="w">
+					</span><span class="nb">log</span><span class="w"> </span><span class="s2">"还在连接中..."</span><span class="w">
+					</span><span class="na">key code</span><span class="w"> </span><span class="mi">53</span><span class="w">
+					</span><span class="nb">delay</span><span class="w"> </span><span class="mi">1</span><span class="w">
+				</span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="w">
+			</span><span class="k">end</span><span class="w"> </span><span class="k">tell</span><span class="w">
+		</span><span class="k">end</span><span class="w"> </span><span class="k">tell</span><span class="w">
+	</span><span class="k">end</span><span class="w"> </span><span class="k">repeat</span><span class="w">
+	</span><span class="k">if</span><span class="w"> </span><span class="nv">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">then</span><span class="w">
+		</span><span class="k">return</span><span class="w"> </span><span class="s2">"成功连上 AirPods!!"</span><span class="w">
+	</span><span class="k">else</span><span class="w">
+		</span><span class="k">return</span><span class="w"> </span><span class="s2">"你没打开 AirPods!!"</span><span class="w">
+	</span><span class="k">end</span><span class="w"> </span><span class="k">if</span><span class="w">
+</span><span class="k">end</span><span class="w"> </span><span class="k">tell</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="注意点">注意点</h3>
+<ul>
+  <li>如果你的系统是中文环境，需要把 <strong>“Connect”</strong> 替换成中文，具体替换成什么自己看下菜单栏里面的选项名字。</li>
+</ul>
+
+<h3 id="使用方法">使用方法</h3>
+<ul>
+  <li>命令行方式执行：将代码保存在一个文件中，命名为<em>airpods.applescript</em>，在命令行中输入</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-commend" data-lang="commend"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre>osascript /example/path/to/airpods.applescript</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>执行脚本。</p>
+<ul>
+  <li>使用 Alfred 新建一个 Workflow，把代码输入并设置触发 Workflow 的关键词。为了方便大家，我提供了用于英文 macOS 系统环境的 Workflow <a href="/assets/resource/AirPods.alfredworkflow">下载链接</a>，在 Alfred 中输入 airpods 关键词就能使用。配置使用过程如下图所示。
+<img src="/assets/img/1-1.png" alt="配置Workflow" />
+<img src="/assets/img/1-0.png" alt="配置关键词" />
+<img src="/assets/img/1-2.png" alt="配置 AppleScript 脚本" />
+<img src="/assets/img/1-3.png" alt="使用方法" /></li>
+</ul>
+
+<h3 id="总结">总结</h3>
+<p>AppleScript 本身功能强大，结合 Alfred 使用将更能发挥出其优势。<strong>AppleScipt + Alfred</strong> 的组合将大大提高我们的工作效率。如果大家对于这篇博文有什么问题或意见，可以发邮件与我交流。</p>
+
+</section>
+  
+<footer>
+  <div class="tags">
+    
+    <a class="tag" href="/tags#效率">#效率</a>
+    
+    <a class="tag" href="/tags#AppleScript">#AppleScript</a>
+    
+    <a class="tag" href="/tags#Workflows">#Workflows</a>
+    
+  </div>
+</footer>
+
+
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+
+    </div>
+    
+<script src="/assets/js/katex_init.js"></script>
+
+
+
+<footer class="site-footer">
+	<p class="text">Copyright 2018 Luka. Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

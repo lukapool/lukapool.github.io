@@ -3,7 +3,7 @@
   <head>
 	<meta charset="utf-8">
 	<title>Search | Luka's Blog</title>
-	<meta name="description" content="Luka的博客">
+	<meta name="description" content="Luka's Blog">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- CSS -->
@@ -61,6 +61,14 @@
 			</li>
 			
 			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/iOS.html">
+					iOS
+				</a>
+			</li>
 			
 			
 			
@@ -159,14 +167,14 @@
 <script>
   window.store = {
     
-      "2014-11-30-sample-post-html": {
-        "title": "Sample post 1",
-        "tags": "test, sample",
-        "date": "November 30, 2014",
+      "2018-03-24-e4-bd-bf-e7-94-a8-applescript-e8-bf-9e-e6-8e-a5-e4-bd-a0-e7-9a-84-airpods-html": {
+        "title": "使用 AppleScript 连接你的 AirPods",
+        "tags": "效率, AppleScript, Workflows",
+        "date": "March 24, 2018",
         "author": "",
         "category": "",
-        "content": "Consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem.  Consectetur adipiscing elit  Donec a diam lectus  Sed sit amet ipsum maurisUt turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.Nunc diam velit, adipiscing ut tristique vitae, sagittis vel odio. Maecenas convallis ullamcorper ultricies. Curabitur ornare, ligula semper consectetur sagittis, nisi diam iaculis velit, id fringilla sem nunc vel mi. Nam dictum, odio nec pretium volutpat, arcu ante placerat erat, non tristique elit urna et turpis. Quisque mi metus, ornare sit amet fermentum et, tincidunt et orci. Fusce eget orci a orci congue vestibulum.Ut dolor diam, elementum et vestibulum eu, porttitor vel elit. Curabitur venenatis pulvinar tellus gravida ornare. Sed et erat faucibus nunc euismod ultricies ut id justo. Nullam cursus suscipit nisi, et ultrices justo sodales nec. Fusce venenatis facilisis lectus ac semper. Aliquam at massa ipsum. Quisque bibendum purus convallis nulla ultrices ultricies. Nullam aliquam, mi eu aliquam tincidunt, purus velit laoreet tortor, viverra pretium nisi quam vitae mi. Fusce vel volutpat elit. Nam sagittis nisi dui.  Suspendisse lectus leo, consectetur in tempor sit amet, placerat quis nequeEtiam luctus porttitor lorem, sed suscipit est rutrum non. Curabitur lobortis nisl a enim congue semper. Aenean commodo ultrices imperdiet. Vestibulum ut justo vel sapien venenatis tincidunt.Phasellus eget dolor sit amet ipsum dapibus condimentum vitae quis lectus. Aliquam ut massa in turpis dapibus convallis. Praesent elit lacus, vestibulum at malesuada et, ornare et est. Ut augue nunc, sodales ut euismod non, adipiscing vitae orci. Mauris ut placerat justo. Mauris in ultricies enim. Quisque nec est eleifend nulla ultrices egestas quis ut quam. Donec sollicitudin lectus a mauris pulvinar id aliquam urna cursus. Cras quis ligula sem, vel elementum mi. Phasellus non ullamcorper urna.",
-        "url": "//2014/11/30/sample-post.html"
+        "content": "引言个人觉得 AirPods 是一款十分出色的无线蓝牙耳机，但是我在使用该耳机的过程中仍然遇到某些问题。耳机在 iPhone 和 MacBook 相互切换的过程中经常遇到切换不成功或者切换时间长的情况，例如我想把 AirPods 的连接切换到 Macbook 上，需要点击电脑菜单栏上的蓝牙图标（需在蓝牙设置中设置才会显示）里面的 AirPods 子菜单中的 Connect 选项，AirPods 还不能保证点击一次就能成功连上。如果不成功，还要再操作一次。我曾经试过按四次 Connect 才成功切换 (T_T)。于是我在网上搜索了一下解决的方法，最后决定使用 AppleScript 帮助我完成连接耳机的繁琐操作。AppleScript 是一个好东西，功能十分强大。这里使用了 AppleScript 模拟用户点击菜单栏的功能。代码123456789101112131415161718192021222324252627282930313233343536373839-- 功能说明: 快速在 Macbook 上切换到 AirPods-- 修改: Luka 2018/2/19-- 修改: Luka 2018/2/22; 防止 AirPods 没开机时无限尝试连接；tell application \"System Events\" to tell process \"SystemUIServer\"\tset maxTryCount to 5\tset flag to 0\tset tryCount to 0\tset bt to (first menu bar item whose description is \"bluetooth\") of menu bar 1\trepeat until flag = 1\t\tclick bt\t\ttell (first menu item whose title contains \"AirPods\") of menu of bt\t\t\tclick\t\t\ttell menu 1\t\t\t\tif exists menu item \"Connect\" then -- 耳机没连接\t\t\t\t\tclick menu item \"Connect\"\t\t\t\t\tset tryCount to tryCount + 1\t\t\t\t\tif tryCount = maxTryCount + 1 then\t\t\t\t\t\texit repeat\t\t\t\t\tend if\t\t\t\t\tlog \"开始第\" &amp; tryCount &amp; \"次连接...\"\t\t\t\t\tdelay 6\t\t\t\telse if exists menu item \"Disconnect\" then\t\t\t\t\tkey code 53 -- 为了关闭下拉菜单栏\t\t\t\t\tset flag to 1\t\t\t\t\tlog \"可能已经连上 AirPods 了...\"\t\t\t\telse\t\t\t\t\tlog \"还在连接中...\"\t\t\t\t\tkey code 53\t\t\t\t\tdelay 1\t\t\t\tend if\t\t\tend tell\t\tend tell\tend repeat\tif flag = 1 then\t\treturn \"成功连上 AirPods!!\"\telse\t\treturn \"你没打开 AirPods!!\"\tend ifend tell注意点  如果你的系统是中文环境，需要把 “Connect” 替换成中文，具体替换成什么自己看下菜单栏里面的选项名字。使用方法  命令行方式执行：将代码保存在一个文件中，命名为airpods.applescript，在命令行中输入1osascript /example/path/to/airpods.applescript执行脚本。  使用 Alfred 新建一个 Workflow，把代码输入并设置触发 Workflow 的关键词。为了方便大家，我提供了用于英文 macOS 系统环境的 Workflow 下载链接，在 Alfred 中输入 airpods 关键词就能使用。配置使用过程如下图所示。总结AppleScript 本身功能强大，结合 Alfred 使用将更能发挥出其优势。AppleScipt + Alfred 的组合将大大提高我们的工作效率。如果大家对于这篇博文有什么问题或意见，可以发邮件与我交流。",
+        "url": "//2018/03/24/%E4%BD%BF%E7%94%A8-AppleScript-%E8%BF%9E%E6%8E%A5%E4%BD%A0%E7%9A%84-AirPods.html"
       }
       
     

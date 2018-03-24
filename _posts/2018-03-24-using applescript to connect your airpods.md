@@ -5,7 +5,7 @@ tags: [效率, AppleScript, Workflows]
 ---
 
 ### 引言
-个人觉得 AirPods 是一款十分出色的无线蓝牙耳机，但是我在使用该耳机的过程中仍然遇到某些问题。耳机在 iPhone 和 MacBook 相互切换的过程中经常遇到切换不成功或者切换时间长的情况，例如我想把 AirPods 的连接切换到 Macbook 上，需要点击电脑菜单栏上的蓝牙图标（需在蓝牙设置中设置才会显示）里面的 AirPods 子菜单中的 Connect 选项，AirPods 还不能保证点击一次就能成功连上。如果不成功，还要再操作一次。我曾经试过按四次 Connect 才成功切换 (T_T)。于是我在网上搜索了一下解决的方法，最后决定使用 AppleScript 帮助我完成连接耳机的繁琐操作。AppleScript 是一个好东西，功能十分强大。这里使用了 AppleScript 模拟用户点击菜单栏的功能。
+个人觉得 AirPods 是一款十分出色的无线蓝牙耳机，然而我在使用 AirPods 的过程中仍然遇到某些问题。耳机在 iPhone 和 MacBook 之间相互切换的时候，我经常遇到切换不成功或者切换时间长的情况，例如我想把 AirPods 的连接从 iPhone 切换到 Macbook 上，需要点击电脑菜单栏上的蓝牙图标（需在蓝牙设置中开启显示选项）里面的 AirPods 子菜单中的 Connect 选项，AirPods 还不能保证点击一次就能成功连上。如果不成功，还要再操作一次。我曾经试过按四次 Connect 才成功切换 (T_T)。于是我在网上搜索了一下解决的方法，最后决定使用 AppleScript 帮助我完成连接耳机的繁琐操作。AppleScript 是一个好东西，功能十分强大。这里使用了 AppleScript 模拟用户点击菜单栏的功能。
 
 ### 代码
 {% highlight applescript %}
@@ -51,15 +51,15 @@ end tell
 {% endhighlight %}
 [[下载代码]]({{ site.baseurl }}/assets/resource/airpods.applescript)
 ### 注意点
-- 如果你的系统是中文环境，需要把 **"Connect"** 替换成中文，具体替换成什么自己看下菜单栏里面的选项名字。
+- 如果你的系统是中文环境，需要把代码中 ```Connect``` 、```Disconnect```替换成中文，具体替换成什么自己看下菜单栏里面的选项名字。
 
 ### 使用方法
-- 命令行方式执行：将代码保存在一个文件中，命名为*airpods.applescript*，在命令行中输入
+- 命令行方式执行：将代码保存在一个文件中，命名为***airpods.applescript***，在命令行中输入
 {% highlight console %}
 osascript /example/path/to/airpods.applescript
 {% endhighlight %}
 执行脚本。
-- 使用 Alfred 新建一个 Workflow，把代码输入并设置触发 Workflow 的关键词。为了方便大家，我提供了用于英文 macOS 系统环境的 Workflow [下载链接]({{ site.baseurl }}/assets/resource/AirPods.alfredworkflow)，在 Alfred 中输入 airpods 关键词就能使用。配置使用过程如下图所示。
+- Alfred：使用 Alfred 新建一个 Workflow，把代码输入并设置触发 Workflow 的关键词。为了方便大家，我提供了用于英文 macOS 系统环境的 Workflow [[下载链接]]({{ site.baseurl }}/assets/resource/AirPods.alfredworkflow)，在 Alfred 中输入 airpods 关键词就能使用。配置使用过程如下图所示。
 ![配置Workflow]({{ site.baseurl }}/assets/img/1-1.png)
 ![配置关键词]({{ site.baseurl }}/assets/img/1-0.png)
 ![配置 AppleScript 脚本]({{ site.baseurl }}/assets/img/1-2.png)

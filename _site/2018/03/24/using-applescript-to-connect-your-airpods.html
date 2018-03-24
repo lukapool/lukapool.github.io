@@ -3,7 +3,7 @@
   <head>
 	<meta charset="utf-8">
 	<title>使用 AppleScript 连接你的 AirPods | Luka's Blog</title>
-	<meta name="description" content="引言个人觉得 AirPods 是一款十分出色的无线蓝牙耳机，但是我在使用该耳机的过程中仍然遇到某些问题。耳机在 iPhone 和 MacBook 相互切换的过程中经常遇到切换不成功或者切换时间长的情况，例如我想把 AirPods 的连接切换到 Macbook 上，需要点击电脑菜单栏上的蓝牙图标（需在蓝牙设置中设置...">
+	<meta name="description" content="引言个人觉得 AirPods 是一款十分出色的无线蓝牙耳机，然而我在使用 AirPods 的过程中仍然遇到某些问题。耳机在 iPhone 和 MacBook 之间相互切换的时候，我经常遇到切换不成功或者切换时间长的情况，例如我想把 AirPods 的连接从 iPhone 切换到 Macbook 上，需要点击电脑菜...">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- CSS -->
@@ -13,7 +13,7 @@
 	<link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
 
 	<!-- Canonical -->
-	<link rel="canonical" href="/2018/03/24/%E4%BD%BF%E7%94%A8-AppleScript-%E8%BF%9E%E6%8E%A5%E4%BD%A0%E7%9A%84-AirPods.html">
+	<link rel="canonical" href="/2018/03/24/using-applescript-to-connect-your-airpods.html">
 
 	<!-- RSS -->
 	<link rel="alternate" type="application/atom+xml" title="Luka's Blog" href="/feed.xml" />
@@ -161,7 +161,7 @@
     </p>
   </header>
   <section class="post-content"><h3 id="引言">引言</h3>
-<p>个人觉得 AirPods 是一款十分出色的无线蓝牙耳机，但是我在使用该耳机的过程中仍然遇到某些问题。耳机在 iPhone 和 MacBook 相互切换的过程中经常遇到切换不成功或者切换时间长的情况，例如我想把 AirPods 的连接切换到 Macbook 上，需要点击电脑菜单栏上的蓝牙图标（需在蓝牙设置中设置才会显示）里面的 AirPods 子菜单中的 Connect 选项，AirPods 还不能保证点击一次就能成功连上。如果不成功，还要再操作一次。我曾经试过按四次 Connect 才成功切换 (T_T)。于是我在网上搜索了一下解决的方法，最后决定使用 AppleScript 帮助我完成连接耳机的繁琐操作。AppleScript 是一个好东西，功能十分强大。这里使用了 AppleScript 模拟用户点击菜单栏的功能。</p>
+<p>个人觉得 AirPods 是一款十分出色的无线蓝牙耳机，然而我在使用 AirPods 的过程中仍然遇到某些问题。耳机在 iPhone 和 MacBook 之间相互切换的时候，我经常遇到切换不成功或者切换时间长的情况，例如我想把 AirPods 的连接从 iPhone 切换到 Macbook 上，需要点击电脑菜单栏上的蓝牙图标（需在蓝牙设置中开启显示选项）里面的 AirPods 子菜单中的 Connect 选项，AirPods 还不能保证点击一次就能成功连上。如果不成功，还要再操作一次。我曾经试过按四次 Connect 才成功切换 (T_T)。于是我在网上搜索了一下解决的方法，最后决定使用 AppleScript 帮助我完成连接耳机的繁琐操作。AppleScript 是一个好东西，功能十分强大。这里使用了 AppleScript 模拟用户点击菜单栏的功能。</p>
 
 <h3 id="代码">代码</h3>
 
@@ -208,19 +208,19 @@
 <p><a href="/assets/resource/airpods.applescript">[下载代码]</a></p>
 <h3 id="注意点">注意点</h3>
 <ul>
-  <li>如果你的系统是中文环境，需要把 <strong>“Connect”</strong> 替换成中文，具体替换成什么自己看下菜单栏里面的选项名字。</li>
+  <li>如果你的系统是中文环境，需要把代码中 <code class="highlighter-rouge">Connect</code> 、<code class="highlighter-rouge">Disconnect</code>替换成中文，具体替换成什么自己看下菜单栏里面的选项名字。</li>
 </ul>
 
 <h3 id="使用方法">使用方法</h3>
 <ul>
-  <li>命令行方式执行：将代码保存在一个文件中，命名为<em>airpods.applescript</em>，在命令行中输入</li>
+  <li>命令行方式执行：将代码保存在一个文件中，命名为<strong><em>airpods.applescript</em></strong>，在命令行中输入</li>
 </ul>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">osascript /example/path/to/airpods.applescript</span></code></pre></figure>
 
 <p>执行脚本。</p>
 <ul>
-  <li>使用 Alfred 新建一个 Workflow，把代码输入并设置触发 Workflow 的关键词。为了方便大家，我提供了用于英文 macOS 系统环境的 Workflow <a href="/assets/resource/AirPods.alfredworkflow">下载链接</a>，在 Alfred 中输入 airpods 关键词就能使用。配置使用过程如下图所示。
+  <li>Alfred：使用 Alfred 新建一个 Workflow，把代码输入并设置触发 Workflow 的关键词。为了方便大家，我提供了用于英文 macOS 系统环境的 Workflow <a href="/assets/resource/AirPods.alfredworkflow">[下载链接]</a>，在 Alfred 中输入 airpods 关键词就能使用。配置使用过程如下图所示。
 <img src="/assets/img/1-1.png" alt="配置Workflow" />
 <img src="/assets/img/1-0.png" alt="配置关键词" />
 <img src="/assets/img/1-2.png" alt="配置 AppleScript 脚本" />

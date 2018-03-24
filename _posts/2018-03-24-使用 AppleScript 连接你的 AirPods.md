@@ -8,7 +8,7 @@ tags: [效率, AppleScript, Workflows]
 	个人觉得 AirPods 是一款十分出色的无线蓝牙耳机，但是我在使用该耳机的过程中仍然遇到某些问题。耳机在 iPhone 和 MacBook 相互切换的过程中经常遇到切换不成功或者切换时间长的情况，例如我想把 AirPods 的连接切换到 Macbook 上，需要点击电脑菜单栏上的蓝牙图标（需在蓝牙设置中设置才会显示）里面的 AirPods 子菜单中的 Connect 选项，AirPods 还不能保证点击一次就能成功连上。如果不成功，还要再操作一次。我曾经试过按四次 Connect 才成功切换 (T_T)。于是我在网上搜索了一下解决的方法，最后决定使用 AppleScript 帮助我完成连接耳机的繁琐操作。AppleScript 是一个好东西，功能十分强大。这里使用了 AppleScript 模拟用户点击菜单栏的功能。
 
 ### 代码
-{% highlight applescript linenos %}
+{% highlight applescript %}
 -- 功能说明: 快速在 Macbook 上切换到 AirPods
 -- 修改: Luka 2018/2/19
 -- 修改: Luka 2018/2/22; 防止 AirPods 没开机时无限尝试连接；
@@ -55,7 +55,7 @@ end tell
 
 ### 使用方法
 - 命令行方式执行：将代码保存在一个文件中，命名为*airpods.applescript*，在命令行中输入
-{% highlight commend linenos %}
+{% highlight commend %}
 osascript /example/path/to/airpods.applescript
 {% endhighlight %}
 执行脚本。

@@ -7,8 +7,6 @@ figure {
   margin: 0;
 }
 pre {
-  overflow: auto;
-  background-color: red;
   margin-bottom: 1.3em;
   padding: 1em 2.5%;
   background: #e8f2fb;
@@ -17,6 +15,15 @@ pre {
   font-size: .9em;
   font-weight: normal;
   line-height: 1.3em;
+  overflow: scroll;
+}
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 // For correct line number width in Github Gists
 .gist table tbody tr td {

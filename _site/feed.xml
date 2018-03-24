@@ -5,15 +5,14 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://localhost:4000/</link>
     <description>Luka's Blog</description>
-    <pubDate>Sat, 24 Mar 2018 15:11:44 +0800</pubDate>
+    <pubDate>Sat, 24 Mar 2018 16:20:45 +0800</pubDate>
     
       <item>
         <title>使用 AppleScript 连接你的 AirPods</title>
         <link>/2018/03/24/%E4%BD%BF%E7%94%A8-AppleScript-%E8%BF%9E%E6%8E%A5%E4%BD%A0%E7%9A%84-AirPods.html</link>
         <guid isPermaLink="true">/2018/03/24/%E4%BD%BF%E7%94%A8-AppleScript-%E8%BF%9E%E6%8E%A5%E4%BD%A0%E7%9A%84-AirPods.html</guid>
         <description>&lt;h3 id=&quot;引言&quot;&gt;引言&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;个人觉得 AirPods 是一款十分出色的无线蓝牙耳机，但是我在使用该耳机的过程中仍然遇到某些问题。耳机在 iPhone 和 MacBook 相互切换的过程中经常遇到切换不成功或者切换时间长的情况，例如我想把 AirPods 的连接切换到 Macbook 上，需要点击电脑菜单栏上的蓝牙图标（需在蓝牙设置中设置才会显示）里面的 AirPods 子菜单中的 Connect 选项，AirPods 还不能保证点击一次就能成功连上。如果不成功，还要再操作一次。我曾经试过按四次 Connect 才成功切换 (T_T)。于是我在网上搜索了一下解决的方法，最后决定使用 AppleScript 帮助我完成连接耳机的繁琐操作。AppleScript 是一个好东西，功能十分强大。这里使用了 AppleScript 模拟用户点击菜单栏的功能。
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;个人觉得 AirPods 是一款十分出色的无线蓝牙耳机，但是我在使用该耳机的过程中仍然遇到某些问题。耳机在 iPhone 和 MacBook 相互切换的过程中经常遇到切换不成功或者切换时间长的情况，例如我想把 AirPods 的连接切换到 Macbook 上，需要点击电脑菜单栏上的蓝牙图标（需在蓝牙设置中设置才会显示）里面的 AirPods 子菜单中的 Connect 选项，AirPods 还不能保证点击一次就能成功连上。如果不成功，还要再操作一次。我曾经试过按四次 Connect 才成功切换 (T_T)。于是我在网上搜索了一下解决的方法，最后决定使用 AppleScript 帮助我完成连接耳机的繁琐操作。AppleScript 是一个好东西，功能十分强大。这里使用了 AppleScript 模拟用户点击菜单栏的功能。&lt;/p&gt;
 
 &lt;h3 id=&quot;代码&quot;&gt;代码&lt;/h3&gt;
 

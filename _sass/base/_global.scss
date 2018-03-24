@@ -6,6 +6,10 @@
 figure {
   margin: 0;
 }
+pre {
+  overflow: auto;
+  word-wrap: normal;
+}
 // For correct line number width in Github Gists
 .gist table tbody tr td {
   box-sizing: content-box;

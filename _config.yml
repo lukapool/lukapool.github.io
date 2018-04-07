@@ -1,6 +1,6 @@
 # SITE CONFIGURATION
 baseurl: ""
-url: "https://lukapool.github.io"
+url: "https://lukapool.xyz"
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
@@ -76,7 +76,10 @@ highlighter: rouge
 sass:
   sass_dir: _sass
   style: :compressed
-plugins: [jekyll-paginate]
+# plugins: [jekyll-paginate]
+plugins:
+  - jekyll-sitemap
+  - jekyll-paginate
 #theme: jekyll-theme-type
 exclude:
   - Gemfile
